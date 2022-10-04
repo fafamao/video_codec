@@ -1,5 +1,8 @@
 #include <math.h>
 #include <iostream>
+#include <stdio.h>
+
+#define YUV_DIM 3
 
 const int dct_quant[8][8] = {
     {16, 11, 10, 16, 24, 40, 51, 61},
@@ -21,13 +24,17 @@ typedef struct
 class Encoder
 {
 public:
-    Encoder();
+    Encoder(const int frame_size);
     ~Encoder();
     void dct();
-    void rgb24_to_yuv(const uint8_t *rgbBuf_p, const int frame_size);
-    void run();
+    void rgb24_to_yuv(RGB_24 *rgb_24);
+    void run(const uint8_t *rgbBuf_p);
 
 private:
+    int n_bytes_per_frame;
+    uint8_t *y_p;
+    uint8_t *u_p;
+    uint8_t *v_p;
     float *dct_in;
     float *dct_out;
 };

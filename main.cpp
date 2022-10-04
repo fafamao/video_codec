@@ -48,7 +48,7 @@ int main()
         std::cout << "Current position of raw is " << inFile.tellg() << "\n";
         printf("Read %d-byte from raw video to %p..\n", frame_size, rgbBuf_p);
 
-        Encoder code;
+        Encoder code(frame_size);
     }
 
     delete[] rgbBuf_p;
